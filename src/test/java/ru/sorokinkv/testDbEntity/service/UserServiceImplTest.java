@@ -10,8 +10,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.event.annotation.BeforeTestExecution;
 import org.springframework.test.context.event.annotation.BeforeTestMethod;
+import org.springframework.transaction.annotation.Transactional;
 import ru.sorokinkv.testDbEntity.model.UserEntity;
 import ru.sorokinkv.testDbEntity.reposiroty.UserRepository;
 
@@ -19,8 +21,10 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.transaction.annotation.Propagation.NOT_SUPPORTED;
 
-@ExtendWith(MockitoExtension.class)
+@DataJpaTest
+@Transactional(propagation = NOT_SUPPORTED)
 class UserServiceImplTest {
 
     private static List<UserEntity> userList;
@@ -30,8 +34,6 @@ class UserServiceImplTest {
 
     @InjectMocks
     private UserServiceImpl userService;
-
-
 
 
     @Test
